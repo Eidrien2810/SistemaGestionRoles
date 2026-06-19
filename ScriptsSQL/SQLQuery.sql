@@ -200,3 +200,6 @@ COLLATE SQL_Latin1_General_CP1_CS_AS;
 ALTER TABLE Usuarios 
 ALTER COLUMN NombreUsuario VARCHAR(50) 
 COLLATE SQL_Latin1_General_CP1_CS_AS;
+
+-- Esta linea arregla el error de que en la tabla clientes los ids salten a 1000
+ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = OFF

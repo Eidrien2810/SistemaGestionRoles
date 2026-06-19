@@ -385,6 +385,7 @@
             this.txtContrasena.BackColor = System.Drawing.Color.White;
             this.txtContrasena.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtContrasena.Location = new System.Drawing.Point(1, 7);
+            this.txtContrasena.MaxLength = 20;
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(173, 13);
             this.txtContrasena.TabIndex = 3;
@@ -408,6 +409,7 @@
             // txtUsuario
             // 
             this.txtUsuario.Location = new System.Drawing.Point(63, 195);
+            this.txtUsuario.MaxLength = 16;
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(200, 20);
             this.txtUsuario.TabIndex = 1;
