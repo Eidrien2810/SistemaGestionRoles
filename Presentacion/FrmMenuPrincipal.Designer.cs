@@ -284,7 +284,7 @@
             // panel22
             // 
             this.panel22.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel22.BackColor = System.Drawing.Color.LightGray;
+            this.panel22.BackColor = System.Drawing.Color.MidnightBlue;
             this.panel22.Controls.Add(this.label13);
             this.panel22.Controls.Add(this.pictureBox7);
             this.panel22.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -298,7 +298,7 @@
             this.label13.AutoSize = true;
             this.label13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Gray;
+            this.label13.ForeColor = System.Drawing.Color.White;
             this.label13.Location = new System.Drawing.Point(33, 9);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 13);

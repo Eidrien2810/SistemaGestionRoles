@@ -191,3 +191,12 @@ WHERE
     OR Correo LIKE @Filtro
     OR CAST(IdCliente AS VARCHAR) LIKE @Filtro;
 */
+
+-- Esta linea de aca hace case sensitive estos campos
+ALTER TABLE Usuarios 
+ALTER COLUMN Clave VARCHAR(100) 
+COLLATE SQL_Latin1_General_CP1_CS_AS;
+
+ALTER TABLE Usuarios 
+ALTER COLUMN NombreUsuario VARCHAR(50) 
+COLLATE SQL_Latin1_General_CP1_CS_AS;

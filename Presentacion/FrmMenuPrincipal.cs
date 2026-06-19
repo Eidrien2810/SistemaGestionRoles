@@ -758,44 +758,7 @@ namespace SistemaGestionRoles
             DeleteRecord();
 
         }
-        /*private void DeleteRecord()
-        {
-            switch (sessionUser.IdRol)
-            {
-                case 2:
-                    MessageBox.Show(
-                    "Como supervisor no tienes permitido Eliminar registros",
-                    "Permisos insuficientes",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                    );
-                    return;
-                    
-
-                case 3:
-                    MessageBox.Show(
-                    "Como Ejecutor no tienes permitido Eliminar registros",
-                    "Permisos insuficientes",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                    );
-                    return;
-            }
-        }*/
-        /*private void EditRecord()
-        {
-            if (sessionUser.IdRol == 3)
-            {
-                MessageBox.Show(
-                    "Como Ejecutor no tienes permitido Modificar registros",
-                    "Permisos insuficientes",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-                return;
-            }
-        }*/
-
+        
         private void lblEdit_Click(object sender, EventArgs e)
         {
             EditRecord();

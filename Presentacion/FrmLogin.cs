@@ -49,7 +49,7 @@ namespace SistemaGestionRoles
         private void txtPassword_KeyUp(object sender, KeyEventArgs e)
         { }
         private void txtUser_KeyUp(object sender, KeyEventArgs e)
-        {}
+        { }
         private void btnMenu_Click(object sender, EventArgs e)
         { }
         private void pnlPassword_Click(object sender, EventArgs e)
@@ -350,52 +350,6 @@ namespace SistemaGestionRoles
             FrmMenuPrincipal nuevoFormulario = new FrmMenuPrincipal(usuarioEncontrado);
             nuevoFormulario.Show();
             this.Close();
-            /*UsuarioDAL usuarioDAL = new UsuarioDAL();
-            Usuario usuarioEncontrado = usuarioDAL.ValidarCredenciales(username, password);
-
-            if (usuarioEncontrado == null)
-            {
-                MessageBox.Show(
-                    "Usuario o contraseña incorrectos.",
-                    "Acceso denegado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-                txtUsuario.Clear();
-                txtContrasena.Clear();
-                txtUsuario.Select();
-                return;
-            }
-
-            if (!usuarioEncontrado.Activo)
-            {
-                MessageBox.Show(
-                    "Este usuario está inactivo o bloqueado.",
-                    "Acceso denegado",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-
-                return;
-            }
-
-            MessageBox.Show(
-                $"Bienvenido {usuarioEncontrado.NombreUsuario}. Rol: {usuarioEncontrado.NombreRol}",
-                "Acceso concedido",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-
-            // Luego aquí abrirás el menú principal
-            // FrmMenuPrincipal menu = new FrmMenuPrincipal(usuarioEncontrado);
-            // menu.Show();
-            // this.Hide();
-            sessionFormUser = usuarioEncontrado;
-            FrmMenuPrincipal nuevoFormulario = new FrmMenuPrincipal(usuarioEncontrado);
-            nuevoFormulario.Show();
-
-            // Ahora sí podemos cerrar el actual definitivamente y liberarlo de la memoria
-            this.Close();*/
         }
 
        private void txtUsuario_KeyUp(object sender, EventArgs e)
@@ -414,6 +368,14 @@ namespace SistemaGestionRoles
         private void pnlContrasena_Click(object sender, EventArgs e)
         {
             txtContrasena.Select();
+        }
+
+        private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                
+            }
         }
     }
 }
