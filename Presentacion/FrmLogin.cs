@@ -1,5 +1,5 @@
-﻿using SistemaGestionRoles.Entidades;
-using SistemaGestionRoles.Datos;
+﻿using SistemaGestionRoles.Datos;
+using SistemaGestionRoles.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace SistemaGestionRoles
 {
@@ -83,13 +84,17 @@ namespace SistemaGestionRoles
             }
             txtUsuario.Text = txtUserPlaceholderText;
             txtUsuario.ForeColor = Color.Gray;
-            txtContrasena.Text = txtPasswordPlaceholderText; 
+            txtContrasena.Text = txtPasswordPlaceholderText;
             txtContrasena.ForeColor = Color.Gray;
 
             txtContrasena.AutoSize = false;
-            txtContrasena.Size = new Size(172, 23);
-        }
+            //txtContrasena.Size = new Size(172, 23);
 
+
+            this.BeginInvoke(new Action(() => {
+                txtUsuario.Focus();
+            }));
+        }
         
         private void signIn_Click(object sender, EventArgs e)
         {
@@ -137,7 +142,7 @@ namespace SistemaGestionRoles
                 txtUsuario.Text = txtUserPlaceholderText;
                 txtUsuario.ForeColor = Color.Gray;
             }
-            this.ActiveControl = null;
+            // No establecer ActiveControl a null: impide que otros controles reciban el foco.
         }
 
         private void txtContrasena_Leave(object sender, EventArgs e)
@@ -153,24 +158,26 @@ namespace SistemaGestionRoles
         
         private void lblUsuario_Click(object sender, EventArgs e)
         {
-            txtUsuario.Select();
+            txtUsuario.Focus();
+            txtUsuario.SelectAll();
         }
 
         private void lblContrasena_Click(object sender, EventArgs e)
         {
-            txtContrasena.Select();
+            txtContrasena.Focus();
+            txtContrasena.SelectAll();
         }
 
        
         private void pbToggleContrasena_MouseUp(object sender, MouseEventArgs e)
         {
-            picTogglePassword.Image = SistemaGestionRoles.Properties.Resources.ojo_cerrado;
+            picTogglePassword.Image = Properties.Resources.ojo_cerrado;
             txtContrasena.UseSystemPasswordChar = true;
         }
 
         private void pbToggleContrasena_MouseDown(object sender, MouseEventArgs e)
         {
-            picTogglePassword.Image = SistemaGestionRoles.Properties.Resources.ojo_abierto;
+            picTogglePassword.Image = Properties.Resources.ojo_abierto;
             txtContrasena.UseSystemPasswordChar = false;
         }
         
@@ -204,16 +211,7 @@ namespace SistemaGestionRoles
 
             if (!user.IsUsernameValid(username))
             {
-                MessageBox.Show(
-                    "El texto debe ser un email válido o un usuario de 3 a 16 caracteres, sin espacios.",
-                    "Usuario inválido",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
-                txtUsuario.Select();
-                txtUsuario.BackColor = Color.LightSalmon;
-                txtUsuario.ForeColor = Color.Red;
+                // InvalidUsername();
                 return;
             }
 
@@ -226,7 +224,7 @@ namespace SistemaGestionRoles
                     MessageBoxIcon.Warning
                 );
 
-                txtContrasena.Select();
+                txtContrasena.Focus();
                 pnlContrasena.BackColor = Color.LightSalmon;
                 txtContrasena.BackColor = Color.LightSalmon;
                 txtContrasena.ForeColor = Color.Red;
@@ -251,7 +249,7 @@ namespace SistemaGestionRoles
                 );
 
                 txtContrasena.Clear();
-                txtUsuario.Select();
+                txtUsuario.Focus();
                 return;
             }
 
@@ -267,7 +265,7 @@ namespace SistemaGestionRoles
 
                 txtUsuario.Clear();
                 txtContrasena.Clear();
-                txtUsuario.Select();
+                txtUsuario.Focus();
                 return;
             }
 
@@ -332,7 +330,7 @@ namespace SistemaGestionRoles
                 }
 
                 txtContrasena.Clear();
-                txtContrasena.Select();
+                txtContrasena.Focus();
                 return;
             }
 
@@ -367,14 +365,73 @@ namespace SistemaGestionRoles
 
         private void pnlContrasena_Click(object sender, EventArgs e)
         {
-            txtContrasena.Select();
+            txtContrasena.Focus();
+            txtContrasena.SelectAll();
         }
 
         private void txtUsuario_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter) {
+                //textBox1.Focus();
+
+                string username = txtUsuario.Text.Trim();
+                Usuario user = new Usuario();
+
+                if (!user.IsUsernameValid(username))
+                {
+                    InvalidUsername(); 
+                    return;
+                } else
+                {
+                    txtContrasena.Focus();
+                    txtContrasena.SelectAll();
+                }
+            }
+        }
+        private void InvalidUsername()
+        {
+            MessageBox.Show(
+                "El texto debe ser un email válido o un usuario de 3 a 16 caracteres, sin espacios.",
+                "Usuario inválido",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning
+            );
+
+            txtUsuario.Focus();
+            txtUsuario.BackColor = Color.LightSalmon;
+            txtUsuario.ForeColor = Color.Red;
+        }
+        private void InvalidPassword()
+        {
+            MessageBox.Show(
+    "La contraseña no puede estar vacía ni contener solo espacios, y debe tener entre 8 y 20 caracteres.",
+    "Contraseña inválida",
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Warning
+);
+
+            txtContrasena.Focus();
+            pnlContrasena.BackColor = Color.LightSalmon;
+            txtContrasena.BackColor = Color.LightSalmon;
+            txtContrasena.ForeColor = Color.Red;
+        }
+
+        private void txtContrasena_KeyDown(object sender, KeyEventArgs e)
+        {
             if (e.KeyCode == Keys.Enter)
             {
-                
+                string password = txtContrasena.Text;
+                Usuario user = new Usuario();
+
+                if (!user.IsPasswordValid(password))
+                {
+                    InvalidPassword();
+                    return;
+                }
+                else
+                {
+                    LogIn();
+                }
             }
         }
     }

@@ -289,7 +289,7 @@
             this.panelLogin.Location = new System.Drawing.Point(0, 0);
             this.panelLogin.Name = "panelLogin";
             this.panelLogin.Size = new System.Drawing.Size(800, 490);
-            this.panelLogin.TabIndex = 3;
+            this.panelLogin.TabIndex = 0;
             this.panelLogin.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLogin_Paint);
             // 
             // panel4
@@ -299,7 +299,7 @@
             this.panel4.Location = new System.Drawing.Point(386, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(414, 490);
-            this.panel4.TabIndex = 4;
+            this.panel4.TabIndex = 0;
             // 
             // panel2
             // 
@@ -317,7 +317,7 @@
             this.panel2.Location = new System.Drawing.Point(64, 60);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(338, 392);
-            this.panel2.TabIndex = 3;
+            this.panel2.TabIndex = 0;
             // 
             // signIn
             // 
@@ -328,7 +328,7 @@
             this.signIn.Location = new System.Drawing.Point(170, 309);
             this.signIn.Name = "signIn";
             this.signIn.Size = new System.Drawing.Size(91, 23);
-            this.signIn.TabIndex = 9;
+            this.signIn.TabIndex = 3;
             this.signIn.Click += new System.EventHandler(this.signIn_Click);
             // 
             // lblSignIn
@@ -349,7 +349,7 @@
             this.btnSalir.Location = new System.Drawing.Point(63, 309);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
-            this.btnSalir.TabIndex = 8;
+            this.btnSalir.TabIndex = 4;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
@@ -363,7 +363,7 @@
             this.pnlContrasena.Location = new System.Drawing.Point(63, 253);
             this.pnlContrasena.Name = "pnlContrasena";
             this.pnlContrasena.Size = new System.Drawing.Size(200, 27);
-            this.pnlContrasena.TabIndex = 5;
+            this.pnlContrasena.TabIndex = 0;
             this.pnlContrasena.Click += new System.EventHandler(this.pnlContrasena_Click);
             // 
             // pbToggleContrasena
@@ -387,8 +387,9 @@
             this.txtContrasena.Location = new System.Drawing.Point(1, 7);
             this.txtContrasena.Name = "txtContrasena";
             this.txtContrasena.Size = new System.Drawing.Size(173, 13);
-            this.txtContrasena.TabIndex = 6;
+            this.txtContrasena.TabIndex = 3;
             this.txtContrasena.Enter += new System.EventHandler(this.txtContrasena_Enter);
+            this.txtContrasena.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContrasena_KeyDown);
             this.txtContrasena.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtContrasena_KeyUp);
             this.txtContrasena.Leave += new System.EventHandler(this.txtContrasena_Leave);
             // 
@@ -400,7 +401,7 @@
             this.lblContrasena.Location = new System.Drawing.Point(61, 237);
             this.lblContrasena.Name = "lblContrasena";
             this.lblContrasena.Size = new System.Drawing.Size(71, 13);
-            this.lblContrasena.TabIndex = 6;
+            this.lblContrasena.TabIndex = 0;
             this.lblContrasena.Text = "Contraseña";
             this.lblContrasena.Click += new System.EventHandler(this.lblContrasena_Click);
             // 
@@ -409,7 +410,7 @@
             this.txtUsuario.Location = new System.Drawing.Point(63, 195);
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(200, 20);
-            this.txtUsuario.TabIndex = 4;
+            this.txtUsuario.TabIndex = 1;
             this.txtUsuario.Enter += new System.EventHandler(this.txtUsuario_Enter);
             this.txtUsuario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUsuario_KeyDown);
             this.txtUsuario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUsuario_KeyUp);
@@ -423,7 +424,7 @@
             this.lblUsuario.Location = new System.Drawing.Point(61, 179);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(160, 13);
-            this.lblUsuario.TabIndex = 3;
+            this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Nombre de Usuario o Email";
             this.lblUsuario.Click += new System.EventHandler(this.lblUsuario_Click);
             // 
@@ -435,7 +436,7 @@
             this.label3.Location = new System.Drawing.Point(18, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(303, 30);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Sistema de Gestion de Roles";
             // 
             // pictureBox3
