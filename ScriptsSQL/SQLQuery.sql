@@ -203,3 +203,57 @@ COLLATE SQL_Latin1_General_CP1_CS_AS;
 
 -- Esta linea arregla el error de que en la tabla clientes los ids salten a 1000
 ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE = OFF
+
+CREATE TABLE Productos(
+	Codigo INT IDENTITY(1,1) PRIMARY KEY,
+	Nombre VARCHAR(255) NOT NULL,
+	Precio DECIMAL(19, 4) NOT NULL,
+	Stock INT NOT NULL,
+	Categoria VARCHAR(255) NULL,
+	ImagenUrl VARCHAR(500) NULL,
+	Estado BIT NOT NULL DEFAULT 1,
+    ImagenPublicId VARCHAR(255) NULL,
+    FechaCreacion DATETIME NOT NULL DEFAULT GETDATE()
+);
+
+INSERT INTO Productos (Nombre, Precio, Stock, Categoria, ImagenUrl)
+VALUES
+('Laptop Dell Inspiron', 38500.00, 8, 'Tecnología', 'https://picsum.photos/seed/laptop-dell/300/300'),
+
+('Mouse Logitech', 950.00, 35, 'Accesorios', 'https://picsum.photos/seed/mouse-logitech/300/300'),
+
+('Teclado Mecánico Redragon', 2850.00, 18, 'Accesorios', 'https://picsum.photos/seed/teclado-redragon/300/300'),
+
+('Monitor Samsung 24 pulgadas', 11200.00, 10, 'Tecnología', 'https://picsum.photos/seed/monitor-samsung/300/300'),
+
+('Impresora Epson EcoTank', 17800.00, 6, 'Oficina', 'https://picsum.photos/seed/impresora-epson/300/300'),
+
+('Memoria USB 64GB Kingston', 450.00, 50, 'Almacenamiento', 'https://picsum.photos/seed/usb-kingston/300/300'),
+
+('Disco SSD 512GB', 3200.00, 22, 'Almacenamiento', 'https://picsum.photos/seed/ssd-512gb/300/300'),
+
+('Router TP-Link', 2450.00, 14, 'Redes', 'https://picsum.photos/seed/router-tplink/300/300'),
+
+('Audífonos Bluetooth', 1650.00, 27, 'Audio', 'https://picsum.photos/seed/audifonos-bluetooth/300/300'),
+
+('Bocina JBL Go', 2250.00, 16, 'Audio', 'https://picsum.photos/seed/bocina-jbl/300/300'),
+
+('Webcam Full HD', 1850.00, 12, 'Accesorios', 'https://picsum.photos/seed/webcam-fullhd/300/300'),
+
+('Silla Ejecutiva', 7400.00, 9, 'Oficina', 'https://picsum.photos/seed/silla-ejecutiva/300/300'),
+
+('Escritorio Moderno', 9800.00, 5, 'Oficina', 'https://picsum.photos/seed/escritorio-moderno/300/300'),
+
+('Tablet Samsung Galaxy', 15200.00, 7, 'Tecnología', 'https://picsum.photos/seed/tablet-samsung/300/300'),
+
+('Cargador USB-C 25W', 850.00, 40, 'Accesorios', 'https://picsum.photos/seed/cargador-usbc/300/300'),
+
+('Cable HDMI 2 metros', 375.00, 60, 'Accesorios', 'https://picsum.photos/seed/cable-hdmi/300/300'),
+
+('Regleta Eléctrica', 650.00, 30, 'Electricidad', 'https://picsum.photos/seed/regleta-electrica/300/300'),
+
+('Cámara de Seguridad WiFi', 3950.00, 11, 'Seguridad', 'https://picsum.photos/seed/camara-seguridad/300/300'),
+
+('Smartwatch Genérico', 2750.00, 20, 'Tecnología', 'https://picsum.photos/seed/smartwatch/300/300'),
+
+('Mochila para Laptop', 1950.00, 15, 'Accesorios', 'https://picsum.photos/seed/mochila-laptop/300/300');

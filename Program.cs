@@ -11,16 +11,24 @@ namespace SistemaGestionRoles
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
+
+        public static ApplicationContext ContextoApp;
+
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Application.Run(new FrmLogin());
-            var login = new FrmLogin();
+            ContextoApp = new ApplicationContext();
+
+            // Obtenemos la instancia del login
+            FrmLogin login = FrmLogin.ObtenerInstancia();
+            ContextoApp.MainForm = login;
+            
+
             login.Show();
-            Application.Run();
+            Application.Run(ContextoApp);
         }
     }
 }

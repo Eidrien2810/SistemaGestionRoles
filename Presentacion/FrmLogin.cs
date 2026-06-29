@@ -56,7 +56,19 @@ namespace SistemaGestionRoles
         private void pnlPassword_Click(object sender, EventArgs e)
         { }
 
+        //  Variable estática que guardará la única instancia en memoria (para no tener memory leaks o procesos fantasmas que no se cierran al darle a la X)
+        private static FrmLogin _instancia = null;
+        public static FrmLogin ObtenerInstancia()
+        {
+            // Si no existe o fue cerrado (destruido), creamos uno nuevo
+            if (_instancia == null || _instancia.IsDisposed)
+            {
+                _instancia = new FrmLogin();
+            }
 
+            return _instancia;
+        }
+        
 
         public Usuario sessionFormUser;
         private void Form1_Resize(object sender, EventArgs e)
@@ -66,6 +78,14 @@ namespace SistemaGestionRoles
             panelLogin.Left = (this.ClientSize.Width - panelLogin.Width) / 2;
             panelLogin.Top = (this.ClientSize.Height - panelLogin.Height) / 2;
 
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit(); // Cierra el programa entero de forma segura
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -345,9 +365,13 @@ namespace SistemaGestionRoles
             );
 
             sessionFormUser = usuarioEncontrado;
-            FrmMenuPrincipal nuevoFormulario = new FrmMenuPrincipal(usuarioEncontrado);
+
+            // Iniciamos una nueva ventana, especificamente la de gestion de clientes.
+            FrmMenuPrincipal nuevoFormulario = FrmMenuPrincipal.ObtenerInstancia(usuarioEncontrado);
+            Program.ContextoApp.MainForm = nuevoFormulario;
             nuevoFormulario.Show();
-            this.Close();
+            nuevoFormulario.BringToFront();
+            this.Hide();
         }
 
        private void txtUsuario_KeyUp(object sender, EventArgs e)

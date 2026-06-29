@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using SistemaGestionRoles.Presentacion;
 
 namespace SistemaGestionRoles
 {
@@ -45,51 +46,74 @@ namespace SistemaGestionRoles
         private Button btnPaginaAnterior;
         private Button btnPaginaSiguiente;
         private Label lblInfoPaginacion;
+
         public FrmMenuPrincipal(Usuario user)
         {
             InitializeComponent();
             sessionUser = user;
+            // Activar el dobluebuffer para eliminar el parpadeo de colores a la hora de pintar la ui
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint |
+                          ControlStyles.UserPaint |
+                          ControlStyles.OptimizedDoubleBuffer, true);
+            this.UpdateStyles();
+        }
+        private static FrmMenuPrincipal _instancia = null;
+        public static FrmMenuPrincipal ObtenerInstancia(Usuario sessionUser)
+        {
+            // Si no existe o fue cerrado (destruido), creamos uno nuevo
+            if (_instancia == null || _instancia.IsDisposed)
+            {
+                _instancia = new FrmMenuPrincipal(sessionUser);
+            }
+
+            return _instancia;
         }
         private void FrmMenuPrincipal_Load(object sender, EventArgs e)
         {
-            //MessageBox.Show($"{sessionUser.NombreUsuario}  {sessionUser.NombreRol}");
+            // Maximizar la ventana desde que cargue el formulario   
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.WindowState = FormWindowState.Maximized;
+
+            // Los label tanto del nombre de usuario como del rol se les asigna su texto correspondiente
             lblUsername.Text = sessionUser.NombreUsuario;
             lblRole.Text = roleMessage[sessionUser.IdRol];
 
+            // Se cambia el avatar del usuario dependiendo del id de su rol (1: admin, 2: supervisor, 3: ejecutor); Ademas, se cambian los aspectos visuales de los botones del CRUD segun los roles de los usuarios
+            // Nota: esto es experimental; ya que, en un punto del proyecto a la hora de implementar el formulario de sign in deberia dejar seleccionar una foto de perfil
             switch (sessionUser.IdRol)
             {
                 case 1:
+                    // Se cambia la imagen segun el rol, se accede en la carpeta resources
                     userAvatar.Image = Properties.Resources.admin;
                     break;
                 case 2:
+                    // Se cambia la imagen segun el rol, se accede en la carpeta resources
                     userAvatar.Image = Properties.Resources.supervisor;
+                    // El color de fondo del panel se cambia, con el objetivo de generar un aspecto de deshabilitado al boton de ELIMINAR
                     pnlDelete.BackColor = Color.Silver;
-                    /*pnlDelete.Enabled = false;
-                    pbDelete.Enabled = false;
-                    lblDelete.Enabled = false;*/
-                    lblDelete.ForeColor = Color.Black;
+
+                    // El color de fondo del panel se cambia, con el objetivo de generar un aspecto de deshabilitado al boton de ANADIR
                     pnlAdd.BackColor = Color.Silver;
-                    lblAdd.ForeColor = Color.Black;
                     break;
                     
                 case 3:
+                    // Se cambia la imagen segun el rol, se accede en la carpeta resources
                     userAvatar.Image = Properties.Resources.ejecutor;
+                    // El color de fondo del panel se cambia, con el objetivo de generar un aspecto de deshabilitado al boton de ELIMINAR
                     pnlDelete.BackColor = Color.Silver;
-                   /* pnlDelete.Enabled = false;
-                    pbDelete.Enabled = false;
-                    lblDelete.Enabled = false;*/
 
+                    // El color de fondo del panel se cambia, con el objetivo de generar un aspecto de deshabilitado al boton de EDITAR
                     pnlEdit.BackColor = Color.Silver;
-                    /*pnlEdit.Enabled = false;
-                    pbEdit.Enabled = false;
-                    lblEdit.Enabled = false;*/
                     break;
                 default:
                     break;
             }
+            // placeholder del buscador de clientes
             txtClients.Text = txtClientsPlaceholderText;
             txtClients.ForeColor = Color.Gray;
 
+            //
             ConfigurarDataGridView();
             CrearControlesPaginacion();
             CargarClientes();
@@ -676,8 +700,6 @@ namespace SistemaGestionRoles
                 );
             if (result == DialogResult.OK)
             {
-                var login = new FrmLogin();
-                login.Show();
                 this.Close();
             }
 
@@ -824,26 +846,48 @@ namespace SistemaGestionRoles
             return Regex.IsMatch(telefono.Trim(), patron);
         }
 
-        private void panel6_Click(object sender, EventArgs e)
+        
+        private void pnlUsuarios_Click(object sender, EventArgs e)
         {
+            // Validamos los roles para permitir solamente al administrador ingresar a este modulo
             if (sessionUser.IdRol == 2)
             {
                 MessageBox.Show(
-                    "Como Supervisor no tienes permisos suficientes para acceder a este modulo",
+                    "Como Supervisor no tienes permisos suficientes para acceder al modulo de Usuarios",
                     "Permisos insuficientes",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
+                return;
             }
             if (sessionUser.IdRol == 3)
             {
                 MessageBox.Show(
-                    "Como Ejecutor no tienes permisos suficientes para acceder a este modulo",
+                    "Como Ejecutor no tienes permisos suficientes para acceder al modulo de Usuarios",
                     "Permisos insuficientes",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
+                return;
             }
+            // Creamos una instancia de la interfaz de usuarios y ocultamos la actual
+            var menuUsuarios = FrmUsuarios.ObtenerInstancia(sessionUser);
+            Program.ContextoApp.MainForm = menuUsuarios;
+            menuUsuarios.Show();
+            menuUsuarios.BringToFront();
+            this.Hide();
+
+
+        }
+
+        private void pnlProductos_Click(object sender, EventArgs e)
+        {
+            // Creamos una instancia de la interfaz de productos y ocultamos la actual
+            var menuProductos = FrmProductos.ObtenerInstancia(sessionUser);
+            Program.ContextoApp.MainForm = menuProductos;
+            menuProductos.Show();
+            menuProductos.BringToFront();
+            this.Hide();
         }
     }
 }

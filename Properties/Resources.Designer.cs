@@ -203,6 +203,16 @@ namespace SistemaGestionRoles.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap query_search {
+            get {
+                object obj = ResourceManager.GetObject("query_search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap querys {
             get {
                 object obj = ResourceManager.GetObject("querys", resourceCulture);
